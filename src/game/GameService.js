@@ -24,7 +24,11 @@ class GameService {
     {name: 'city', label: 'City', colour: 'grey', fontColour: 'black', prefix: 'C'},
   ];
   static globalParameters = [
-  	{name: 'temperature', label: 'Temperature', initialValue: 1, total: 20},
+  	{
+  	  name: 'temperature', label: 'Temperature', initialValue: 1, total: 20,
+      emptyColour: 'blue', fullColour: 'red',
+      getLabel: parameter => `${-32 + parameter.value * 2}\u00B0C`,
+    },
   ];
   static standardProjects = [
   	{

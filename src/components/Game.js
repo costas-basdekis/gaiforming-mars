@@ -25,6 +25,7 @@ class Game extends Component {
     return (
       <svg width={gameSize.width} height={gameSize.height}>
         <defs>
+          <GlobalParameters.Defs />
           <DefaultHexagon.Def/>
         </defs>
         <GlobalParameters

@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import GlobalParameter from "./GlobalParameter";
+import GameService from "../../game/GameService";
 
 class GlobalParameters extends Component {
   static getSize(parameters) {
@@ -34,5 +35,14 @@ class GlobalParameters extends Component {
     );
   }
 }
+
+class GlobalParametersDefs extends Component {
+  render() {
+    return GameService.globalParameters.map(parameter => (
+      <GlobalParameter.Def key={parameter.name} parameter={parameter}/>
+    ));
+  }
+}
+GlobalParameters.Defs = GlobalParametersDefs;
 
 export default GlobalParameters;
