@@ -25,9 +25,9 @@ class GameService {
   ];
   static globalParameters = [
   	{
-  	  name: 'temperature', label: 'Temperature', initialValue: 1, total: 20,
+  	  name: 'temperature', label: 'Temperature', initialValue: 0, maxValue: 19,
       emptyColour: 'blue', fullColour: 'red',
-      getLabel: parameter => `${-32 + parameter.value * 2}\u00B0C`,
+      getLabel: parameter => `${-30 + parameter.value * 2}\u00B0C`,
     },
   ];
   static standardProjects = [
@@ -35,6 +35,13 @@ class GameService {
     	name: 'powerPlant',
       cost: {money: {value: 11}},
       benefit: {energy: {production: 1}},
+      globalParameters: {},
+    },
+  	{
+    	name: 'asteroid',
+      cost: {money: {value: 14}},
+      benefit: {},
+      globalParameters: {temperature: 1},
     },
   ];
   static players = [
@@ -65,9 +72,9 @@ class GameService {
 
     return true;
   }
-  static purchase(player, project) {
+  static purchase(game, player, project) {
   	if (!GameService.canPurchase(player, project)) {
-    	return player;
+    	return {newPlayer: player, newGame: game};
     }
     const newPlayer = {...player, resources: {...player.resources}};
     for (const name in project.cost) {
@@ -90,7 +97,27 @@ class GameService {
       	resource.production += benefit.production;
       }
     }
-    return newPlayer;
+    let newGame = game;
+    for (const name in project.globalParameters) {
+      const count = project.globalParameters[name];
+      for (const i of _.range(count)) {
+        const parameter = newGame.globalParameters[name];
+        if (parameter.value >= parameter.maxValue) {
+          break;
+        }
+        newGame = {
+          ...newGame,
+          globalParameters: newGame.globalParameters.map(parameter => ({
+            ...parameter,
+            value: parameter.value + 1,
+          })),
+        };
+        Object.assign(
+          newGame.globalParameters,
+          _.indexBy(newGame.globalParameters, 'name'));
+      }
+    }
+    return {newPlayer, newGame};
   }
   static makeGame({playerCount = 2} = {}) {
   	return {

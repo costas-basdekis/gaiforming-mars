@@ -28,14 +28,14 @@ class GameControl {
       if (!player.active) {
         return null;
       }
-      const newPlayer = GameService.purchase(player, project);
-      if (newPlayer === player) {
+      const {newGame, newPlayer} = GameService.purchase(game, player, project);
+      if (newPlayer === player && newGame === game) {
         return null;
       }
       return {
         game: {
-          ...game,
-          players: game.players.map(otherPlayer =>
+          ...newGame,
+          players: newGame.players.map(otherPlayer =>
             otherPlayer.id === newPlayer.id ? newPlayer : otherPlayer),
         },
       };

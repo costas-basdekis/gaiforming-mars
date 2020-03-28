@@ -18,12 +18,12 @@ class GlobalParameter extends Component {
           width={globalParametersSize.width}
           height={globalParametersSize.height}
         >
-          <title>{parameter.label}: {parameter.value}/{parameter.total}</title>
+          <title>{parameter.label}: {parameter.value}/{parameter.maxValue}</title>
         </rect>
         <mask x={0} y={0} id={`globalParameterMask-${parameter.name}`}>
           <rect
             x={0} y={0}
-            width={globalParametersSize.width * parameter.value / parameter.total}
+            width={globalParametersSize.width * parameter.value / parameter.maxValue}
             height={globalParametersSize.height}
             fill={'white'}
           />
@@ -41,7 +41,8 @@ class GlobalParameter extends Component {
           fill={'white'}
           style={{pointerEvents: 'none'}}
         >
-          {parameter.label}: {parameter.getLabel(parameter)} ({parameter.value}/{parameter.total})
+          {parameter.label}: {parameter.getLabel(parameter)}
+          ({parameter.value}/{parameter.maxValue})
         </text>
       </g>
     );
