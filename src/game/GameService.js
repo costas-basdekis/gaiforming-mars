@@ -3,7 +3,7 @@ import _ from "underscore";
 class GameService {
 	static resources = [
   	{name: 'tr', label: 'Terraform Rating', colour: 'cyan', fontColour: 'white', initialProduction: 20},
-  	{name: 'money', label: 'MegaCredits', colour: 'yellow', fontColour: 'black', initialValue: 42},
+  	{name: 'money', label: 'MegaCredits', colour: 'yellow', fontColour: 'black', initialValue: 3000},
   	{name: 'steel', label: 'Steel', colour: 'brown', fontColour: 'white'},
   	{name: 'titanium', label: 'Titanium', colour: 'black', fontColour: 'white'},
   	{name: 'plants', label: 'Plants', colour: 'green', fontColour: 'white'},
