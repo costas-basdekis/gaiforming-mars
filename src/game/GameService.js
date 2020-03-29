@@ -36,12 +36,35 @@ class GameService {
       cost: {money: {value: 11}},
       benefit: {energy: {production: 1}},
       globalParameters: {},
+      tiles: {},
     },
   	{
     	name: 'asteroid',
       cost: {money: {value: 14}},
       benefit: {},
       globalParameters: {temperature: 1},
+      tiles: {},
+    },
+  	{
+    	name: 'aquifer',
+      cost: {money: {value: 18}},
+      benefit: {},
+      globalParameters: {},
+      tiles: {water: 1},
+    },
+  	{
+    	name: 'greenery',
+      cost: {money: {value: 23}},
+      benefit: {},
+      globalParameters: {},
+      tiles: {greenery: 1},
+    },
+  	{
+    	name: 'city',
+      cost: {money: {value: 25}},
+      benefit: {money: {production: 1}},
+      globalParameters: {},
+      tiles: {city: 1},
     },
   ];
   static players = [

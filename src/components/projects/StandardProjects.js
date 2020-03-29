@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import GameService from "../../game/GameService";
+import './AquiferStandardProject';
 import './AsteroidStandardProject';
+import './CityStandardProject';
+import './GreeneryStandardProject';
 import './PowerPlantStandardProject';
 
 class StandardProjects extends Component {
