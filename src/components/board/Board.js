@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Hex from "./Hex";
 import Ocean from "../draw/Ocean";
+import City from "../draw/City";
 
 class Board extends Component {
   static getBorder(board) {
@@ -26,7 +27,13 @@ class Board extends Component {
           <Hex
             key={`${tile.x},${tile.y}`}
             x={tile.x} y={tile.y}
-            fill={tile.oceanOnly ? `url(#${Ocean.Def.xlinkHref})` : undefined}
+            fill={(
+              tile.oceanOnly
+              ? `url(#${Ocean.Def.xlinkHref})`
+              : tile.allowedCity
+              ? `url(#${City.Def.xlinkHref})`
+              : undefined
+            )}
           />))}
       </g>
     );

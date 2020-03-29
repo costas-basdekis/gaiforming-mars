@@ -15,6 +15,11 @@ class GameService {
     {x: 7, y: 5},
     {x: 6, y: 8},
   ], ({x, y}) => `${x},${y}`);
+  static boardCities = _.indexBy([
+    {x: 2, y: 4, name: 'noctis', label: 'Noctis'},
+    {x: 0, y: 0, name: 'phobos', label: 'Phobos'},
+    {x: 0, y: 8, name: 'ganymede', label: 'Ganymede'},
+  ], ({x, y}) => `${x},${y}`);
 	static resources = [
   	{name: 'tr', label: 'Terraform Rating', colour: 'cyan', fontColour: 'white', initialProduction: 20},
   	{name: 'money', label: 'MegaCredits', colour: 'yellow', fontColour: 'black', initialValue: 3000},
@@ -184,6 +189,7 @@ class GameService {
         && x <= 8 - Math.ceil((Math.abs(y - 4)) / 2)
       ) || (y === 0 && x === 0) || (y === 8 && x === 0),
       oceanOnly: `${x},${y}` in this.boardOceans,
+      allowedCity: this.boardCities[`${x},${y}`] || null,
     })));
   }
   static makeGlobalParameters() {

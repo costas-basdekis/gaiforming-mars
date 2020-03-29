@@ -169,4 +169,17 @@ class City extends Component {
   }
 }
 
+class CityDef extends Component {
+  static xlinkHref = "city-gradient";
+  render() {
+    return (
+      <radialGradient id={this.constructor.xlinkHref}>
+        <stop offset={"0%"} stopColor={"grey"}/>
+        <stop offset={"70%"} stopColor={"black"}/>
+      </radialGradient>
+    );
+  }
+}
+City.Def = CityDef;
+
 export default City;
