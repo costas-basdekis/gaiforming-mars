@@ -2,7 +2,7 @@ import React, {Component} from "react";
 
 class Greenery extends Component {
   static path = [
-    <path fill={'green'} stroke={'black'} d={`
+    <path key={'hexagon'} fill={'green'} stroke={'black'} d={`
       M 14.57076 20.5262
       H 4.85664
       L 0 12.11376
@@ -12,7 +12,7 @@ class Greenery extends Component {
       L 14.57076 20.5262
       z 
     `}/>,
-    <path d={`
+    <path key={'content'} d={`
       M 14.054540000000001 9.78147
       c 0.015750000000000004 -0.111265 0.02443 -0.22480500000000003 0.02443 -0.34034000000000003
       c 0 -1.3324500000000001 -1.0840200000000002 -2.4164700000000003 -2.4164700000000003 -2.4164700000000003

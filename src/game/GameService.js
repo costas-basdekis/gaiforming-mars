@@ -144,6 +144,9 @@ class GameService {
       }
     }
     for (const name in project.benefit) {
+      if (!project.benefit.hasOwnProperty(name)) {
+        continue;
+      }
     	const benefit = project.benefit[name];
       const resource = newPlayer.resources[name] = {...newPlayer.resources[name]};
       if ('value' in benefit) {
@@ -155,7 +158,11 @@ class GameService {
     }
     let newGame = game;
     for (const name in project.globalParameters) {
+      if (!project.globalParameters.hasOwnProperty(name)) {
+        continue;
+      }
       const count = project.globalParameters[name];
+      // eslint-disable-next-line no-unused-vars
       for (const i of _.range(count)) {
         const parameter = newGame.globalParameters[name];
         if (parameter.maxValue !== null && parameter.value >= parameter.maxValue) {

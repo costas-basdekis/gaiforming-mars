@@ -2,7 +2,7 @@ import React, {Component} from "react";
 
 class Ocean extends Component {
   static path = [
-    <path fill={'cyan'} stroke={'black'} d={`
+    <path key={'hexagon'} fill={'cyan'} stroke={'black'} d={`
       M 14.57076 20.5262
       H 4.85664
       L 0 12.11376
@@ -12,7 +12,7 @@ class Ocean extends Component {
       L 14.57076 20.5262
       z 
     `}/>,
-    <path d={`
+    <path key={'content'} d={`
       M 9.41 14.7708
       c -1.35516 0 -2.03164 -0.3766 -2.73736 -0.77532
       C 5.92216 13.571399999999999 5.08 13.0908 3.44 13.0908

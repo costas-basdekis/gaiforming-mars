@@ -2,7 +2,7 @@ import React, {Component} from "react";
 
 class City extends Component {
   static path = [
-    <path fill={'grey'} stroke={'black'} d={`
+    <path key={'hexagon'} fill={'grey'} stroke={'black'} d={`
       M 14.57076 20.5262
       H 4.85664
       L 0 12.11376
@@ -12,7 +12,7 @@ class City extends Component {
       L 14.57076 20.5262
       z 
     `}/>,
-    <path d={`
+    <path key={'content'} d={`
       M 5.05 11.530275
       h 2.25
       v 0.5

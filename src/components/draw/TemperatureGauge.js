@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 class TemperatureGauge extends Component {
   static path = [
-    <path fill={'red'} stroke={'black'} d={`
+    <path key={'fill'} fill={'red'} stroke={'black'} d={`
       M 10.19185 12.5282
       c -0.03025 -0.019450000000000002 -0.09175 -0.05605 -0.09175 -0.14770000000000003
       V 4.1299
@@ -16,7 +16,7 @@ class TemperatureGauge extends Component {
       C 12.0822 14.578800000000001 11.36585 13.28185 10.19185 12.5282
       z 
     `} />,
-    <path d={`
+    <path key={'content'} d={`
       M 7.970300000000001 19.3504
       c -1.8537500000000002 0 -3.3619000000000003 -1.5082000000000002 -3.3619000000000003 -3.362
       c 0 -1.24465 0.68335 -2.38215 1.78345 -2.9685
