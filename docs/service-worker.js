@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/gaiforming-mars/precache-manifest.3150a0408a11dff0f3e9422dce18c0f2.js"
+  "/gaiforming-mars/precache-manifest.5965d0e7e7fa3018b4f9ae60d29cea0e.js"
 );
 
 self.addEventListener('message', (event) => {
