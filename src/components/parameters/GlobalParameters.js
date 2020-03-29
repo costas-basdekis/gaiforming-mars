@@ -3,11 +3,12 @@ import GlobalParameter from "./GlobalParameter";
 import GameService from "../../game/GameService";
 
 class GlobalParameters extends Component {
+  static columnsPerRow = 2;
   static getSize(parameters) {
     const globalParameterSize = GlobalParameter.getSize(null);
-    const rows = Math.ceil(parameters.length / 3);
+    const rows = Math.ceil(parameters.length / this.columnsPerRow);
     return {
-      width: 3 * globalParameterSize.width,
+      width: this.columnsPerRow * globalParameterSize.width,
       height: rows * globalParameterSize.height + Math.max(0, rows - 1) * 10,
     };
   }
@@ -18,8 +19,8 @@ class GlobalParameters extends Component {
     return (
       <g transform={`translate(${offset.x}, ${offset.y})`}>
         {parameters.map((parameter, index) => {
-          const column = index % 3;
-          const row = Math.floor(index / 3);
+          const column = index % this.constructor.columnsPerRow;
+          const row = Math.floor(index / this.constructor.columnsPerRow);
           return (
             <GlobalParameter
               offset={{
