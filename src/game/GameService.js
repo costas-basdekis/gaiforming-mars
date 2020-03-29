@@ -44,6 +44,10 @@ class GameService {
   ];
   static globalParameters = [
   	{
+  	  name: 'generation', label: 'Generation', initialValue: 1, maxValue: null,
+      getLabel: parameter => `${parameter.value}`,
+    },
+  	{
   	  name: 'temperature', label: 'Temperature', initialValue: 0, maxValue: 19,
       emptyColour: 'blue', fullColour: 'red',
       getLabel: parameter => `${-30 + parameter.value * 2}\u00B0C`,
@@ -154,7 +158,7 @@ class GameService {
       const count = project.globalParameters[name];
       for (const i of _.range(count)) {
         const parameter = newGame.globalParameters[name];
-        if (parameter.value >= parameter.maxValue) {
+        if (parameter.maxValue !== null && parameter.value >= parameter.maxValue) {
           break;
         }
         newGame = {

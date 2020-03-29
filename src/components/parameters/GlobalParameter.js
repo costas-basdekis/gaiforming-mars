@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, Fragment} from "react";
 
 class GlobalParameter extends Component {
   static getSize(parameter) {
@@ -17,32 +17,36 @@ class GlobalParameter extends Component {
           x={0} y={0}
           width={globalParametersSize.width}
           height={globalParametersSize.height}
-        >
-          <title>{parameter.label}: {parameter.value}/{parameter.maxValue}</title>
-        </rect>
-        <mask x={0} y={0} id={`globalParameterMask-${parameter.name}`}>
-          <rect
-            x={0} y={0}
-            width={globalParametersSize.width * parameter.value / parameter.maxValue}
-            height={globalParametersSize.height}
-            fill={'white'}
-          />
-        </mask>
-        <rect
-          x={0} y={0}
-          width={globalParametersSize.width}
-          height={globalParametersSize.height}
-          style={{pointerEvents: 'none'}}
-          fill={`url(#${GlobalParameterDef.getXlinkHref(parameter)})`}
-          mask={`url(#globalParameterMask-${parameter.name})`}
         />
+        {parameter.maxValue !== null ? (
+          <Fragment>
+            <mask x={0} y={0} id={`globalParameterMask-${parameter.name}`}>
+              <rect
+                x={0} y={0}
+                width={globalParametersSize.width * parameter.value / parameter.maxValue}
+                height={globalParametersSize.height}
+                fill={'white'}
+              />
+            </mask>
+            <rect
+              x={0} y={0}
+              width={globalParametersSize.width}
+              height={globalParametersSize.height}
+              style={{pointerEvents: 'none'}}
+              fill={`url(#${GlobalParameterDef.getXlinkHref(parameter)})`}
+              mask={`url(#globalParameterMask-${parameter.name})`}
+            />
+          </Fragment>
+        ) : null}
         <text
           x={10} y={20}
           fill={'white'}
           style={{pointerEvents: 'none'}}
         >
           {parameter.label}: {parameter.getLabel(parameter)}
-          ({parameter.value}/{parameter.maxValue})
+          {parameter.maxValue !== null
+            ? `(${parameter.value}/${parameter.maxValue})`
+            : null}
         </text>
       </g>
     );
