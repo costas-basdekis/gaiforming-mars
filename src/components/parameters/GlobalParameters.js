@@ -24,8 +24,8 @@ class GlobalParameters extends Component {
           return (
             <GlobalParameter
               offset={{
-                x: column * globalParameterSize.width + Math.max(0, column - 1) * 10,
-                y: row * globalParameterSize.height + Math.max(0, row - 1) * 10,
+                x: column * (globalParameterSize.width + 10),
+                y: row * (globalParameterSize.height + 10),
               }}
               key={parameter.name}
               parameter={parameter}
