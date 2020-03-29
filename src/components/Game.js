@@ -4,6 +4,7 @@ import Players from "./players/Players";
 import StandardProjects from "./projects/StandardProjects";
 import GlobalParameters from "./parameters/GlobalParameters";
 import DefaultHexagon from "./draw/DefaultHexagon";
+import Ocean from "./draw/Ocean";
 
 class Game extends Component {
   static getSize(game) {
@@ -27,6 +28,7 @@ class Game extends Component {
         <defs>
           <GlobalParameters.Defs />
           <DefaultHexagon.Def/>
+          <Ocean.Def/>
         </defs>
         <GlobalParameters
           parameters={game.globalParameters}

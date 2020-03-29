@@ -1,6 +1,20 @@
 import _ from "underscore";
 
 class GameService {
+  static boardOceans = _.indexBy([
+    {x: 3, y: 0},
+    {x: 5, y: 0},
+    {x: 6, y: 0},
+    {x: 6, y: 1},
+    {x: 7, y: 3},
+    {x: 3, y: 4},
+    {x: 4, y: 4},
+    {x: 5, y: 4},
+    {x: 5, y: 5},
+    {x: 6, y: 5},
+    {x: 7, y: 5},
+    {x: 6, y: 8},
+  ], ({x, y}) => `${x},${y}`);
 	static resources = [
   	{name: 'tr', label: 'Terraform Rating', colour: 'cyan', fontColour: 'white', initialProduction: 20},
   	{name: 'money', label: 'MegaCredits', colour: 'yellow', fontColour: 'black', initialValue: 3000},
@@ -169,6 +183,7 @@ class GameService {
         x >= Math.ceil((Math.abs(y - 4) - 1) / 2)
         && x <= 8 - Math.ceil((Math.abs(y - 4)) / 2)
       ) || (y === 0 && x === 0) || (y === 8 && x === 0),
+      oceanOnly: `${x},${y}` in this.boardOceans,
     })));
   }
   static makeGlobalParameters() {

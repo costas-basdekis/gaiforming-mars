@@ -55,4 +55,17 @@ class Ocean extends Component {
   }
 }
 
+class OceanDef extends Component {
+  static xlinkHref = "ocean-gradient";
+  render() {
+    return (
+      <radialGradient id={this.constructor.xlinkHref}>
+        <stop offset={"0%"} stopColor={"cyan"}/>
+        <stop offset={"70%"} stopColor={"black"}/>
+      </radialGradient>
+    );
+  }
+}
+Ocean.Def = OceanDef;
+
 export default Ocean;

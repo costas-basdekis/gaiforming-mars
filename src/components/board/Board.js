@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Hex from "./Hex";
+import Ocean from "../draw/Ocean";
 
 class Board extends Component {
   static getBorder(board) {
@@ -22,7 +23,11 @@ class Board extends Component {
       <g transform={`translate(${-x + offset.x}, ${-y + offset.y})`}>
         <rect x={x} y={y} width={width} height={height}/>
         {board.map(row => row.filter(tile => tile.active).map(tile =>
-          <Hex key={`${tile.x},${tile.y}`} x={tile.x} y={tile.y}/>))}
+          <Hex
+            key={`${tile.x},${tile.y}`}
+            x={tile.x} y={tile.y}
+            fill={tile.oceanOnly ? `url(#${Ocean.Def.xlinkHref})` : undefined}
+          />))}
       </g>
     );
   }
