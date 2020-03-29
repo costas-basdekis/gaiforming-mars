@@ -37,7 +37,7 @@ class AsteroidStandardProject extends Component {
           x={100} y={0} width={130} height={25}
           fill={'transparent'}
           className={canPurchase ? 'clickable' : undefined}
-          onClick={this.purchase}
+          onClick={canPurchase ? this.purchase : null}
         />
       </g>
     );
