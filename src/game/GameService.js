@@ -29,6 +29,16 @@ class GameService {
       emptyColour: 'blue', fullColour: 'red',
       getLabel: parameter => `${-30 + parameter.value * 2}\u00B0C`,
     },
+  	{
+  	  name: 'oxygen', label: 'Oxygen', initialValue: 0, maxValue: 14,
+      emptyColour: 'grey', fullColour: 'cyan',
+      getLabel: parameter => `${parameter.value}%`,
+    },
+  	{
+  	  name: 'oceans', label: 'Oceans', initialValue: 0, maxValue: 9,
+      emptyColour: 'darkgoldenrod', fullColour: 'blue',
+      getLabel: parameter => `${parameter.value} oceans`,
+    },
   ];
   static standardProjects = [
   	{
@@ -49,14 +59,14 @@ class GameService {
     	name: 'aquifer',
       cost: {money: {value: 18}},
       benefit: {},
-      globalParameters: {},
+      globalParameters: {oceans: 1},
       tiles: {water: 1},
     },
   	{
     	name: 'greenery',
       cost: {money: {value: 23}},
       benefit: {},
-      globalParameters: {},
+      globalParameters: {oxygen: 1},
       tiles: {greenery: 1},
     },
   	{
