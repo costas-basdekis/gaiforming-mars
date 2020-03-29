@@ -130,10 +130,11 @@ class GameService {
         }
         newGame = {
           ...newGame,
-          globalParameters: newGame.globalParameters.map(parameter => ({
-            ...parameter,
-            value: parameter.value + 1,
-          })),
+          globalParameters: newGame.globalParameters.map(globalParameter =>
+            globalParameter.name === parameter.name ? ({
+              ...globalParameter,
+              value: globalParameter.value + 1,
+            }) : globalParameter),
         };
         Object.assign(
           newGame.globalParameters,
