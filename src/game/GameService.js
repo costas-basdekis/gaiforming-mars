@@ -66,6 +66,7 @@ class GameService {
   static standardProjects = [
   	{
     	name: 'powerPlant',
+      label: 'Power Plant',
       cost: {money: {value: 11}},
       benefit: {energy: {production: 1}},
       globalParameters: {},
@@ -73,6 +74,7 @@ class GameService {
     },
   	{
     	name: 'asteroid',
+      label: 'Asteroid',
       cost: {money: {value: 14}},
       benefit: {tr: {production: 1}},
       globalParameters: {temperature: 1},
@@ -80,6 +82,7 @@ class GameService {
     },
   	{
     	name: 'aquifer',
+      label: 'Aquifer',
       cost: {money: {value: 18}},
       benefit: {tr: {production: 1}},
       globalParameters: {oceans: 1},
@@ -87,6 +90,7 @@ class GameService {
     },
   	{
     	name: 'greenery',
+      label: 'Greenery',
       cost: {money: {value: 23}},
       benefit: {tr: {production: 1}},
       globalParameters: {oxygen: 1},
@@ -94,6 +98,7 @@ class GameService {
     },
   	{
     	name: 'city',
+      label: 'City',
       cost: {money: {value: 25}},
       benefit: {money: {production: 1}},
       globalParameters: {},

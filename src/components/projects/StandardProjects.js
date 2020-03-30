@@ -1,10 +1,6 @@
 import React, {Component} from "react";
 import GameService from "../../game/GameService";
-import './AquiferStandardProject';
-import './AsteroidStandardProject';
-import './CityStandardProject';
-import './GreeneryStandardProject';
-import './PowerPlantStandardProject';
+import StandardProject from "./StandardProject";
 
 class StandardProjects extends Component {
   static getSize(game) {
@@ -29,7 +25,7 @@ class StandardProjects extends Component {
         <text x={20} y={20} fill={'black'}>Standard Projects</text>
 
         {GameService.standardProjects.map((project, index) => (
-          <project.component
+          <StandardProject
             key={index}
             offset={{x: 10, y: 35 + 25 * index}}
             activePlayer={game.activePlayer} project={project}
