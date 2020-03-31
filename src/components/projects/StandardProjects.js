@@ -18,7 +18,7 @@ class StandardProjects extends Component {
         />
 
         <rect
-          x={10} y={0} width={130} height={25}
+          x={10} y={0} width={150} height={25}
           fill={'yellow'}
           stroke={'black'} strokeWidth={2}
         />
