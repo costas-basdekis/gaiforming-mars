@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import Hex from "./Hex";
 import Ocean from "../draw/Ocean";
 import City from "../draw/City";
+import GameService from "../../game/GameService";
+import _ from "underscore";
 
 class Board extends Component {
   static getBorder(board) {
@@ -17,13 +19,18 @@ class Board extends Component {
     return {width, height};
   }
 
+  onPlaceOceanClick = tile => {
+    this.props.control.placeOcean(this.props.game.activePlayer, tile);
+  };
+
   render() {
-    const {board, offset} = this.props;
+    const {game, activePlayer, board, offset} = this.props;
     const {x, y, width, height} = this.constructor.getBorder(board);
+    const activeTiles = _.flatten(board).filter(tile => tile.active);
     return (
       <g transform={`translate(${-x + offset.x}, ${-y + offset.y})`}>
         <rect x={x} y={y} width={width} height={height}/>
-        {board.map(row => row.filter(tile => tile.active).map(tile =>
+        {activeTiles.map(tile =>
           <Hex
             key={`${tile.x},${tile.y}`}
             x={tile.x} y={tile.y}
@@ -34,7 +41,25 @@ class Board extends Component {
               ? `url(#${City.Def.xlinkHref})`
               : undefined
             )}
-          />))}
+          />)}
+        {game.action === "place-water" ? (
+          activeTiles.filter(tile => GameService.canPlaceOcean(game, activePlayer, tile)).map(tile =>
+            <Hex
+              key={`${tile.x},${tile.y}`}
+              x={tile.x} y={tile.y}
+              stroke={'blue'}
+              fill={(
+                tile.oceanOnly
+                ? `url(#${Ocean.Def.xlinkHref})`
+                : tile.allowedCity
+                ? `url(#${City.Def.xlinkHref})`
+                : undefined
+              )}
+              tile={tile}
+              onClick={this.onPlaceOceanClick}
+              className={'clickable'}
+            />)
+        ) : null}
       </g>
     );
   }

@@ -23,7 +23,7 @@ class StandardProject extends Component {
   };
 
   canPurchase() {
-    return GameService.canPurchase(this.props.activePlayer, this.props.project);
+    return GameService.canPurchase(this.props.game, this.props.activePlayer, this.props.project);
   }
 
   purchase = () => {

@@ -1,8 +1,27 @@
 import GameService from "./GameService";
+import _ from "underscore";
 
 class GameControl {
   constructor(update) {
     this.update = update;
+  }
+
+  getPlayer(game, player) {
+    [player] = game.players
+      .filter(otherPlayer => otherPlayer.id === player.id);
+    if (!player) {
+      return null;
+    }
+    return player;
+  }
+
+  getTile(game, tile) {
+    [tile] = _.flatten(game.board)
+      .filter(otherTile => otherTile.x === tile.x && otherTile.y === tile.y);
+    if (!tile) {
+      return null;
+    }
+    return tile;
   }
 
   selectPlayer(player) {
@@ -14,21 +33,22 @@ class GameControl {
           ...otherPlayer,
           active: otherPlayer.id === player.id,
         })),
+        action: "any",
       },
     }));
   }
 
   purchaseProject(player, project) {
     this.update(game => {
-      [player] = game.players
-        .filter(otherPlayer => otherPlayer.id === player.id);
+      player = this.getPlayer(game, player);
       if (!player) {
         return null;
       }
       if (!player.active) {
         return null;
       }
-      const {newGame, newPlayer} = GameService.purchase(game, player, project);
+      const {newGame, newPlayer, action} =
+        GameService.purchase(game, player, project);
       if (newPlayer === player && newGame === game) {
         return null;
       }
@@ -37,6 +57,7 @@ class GameControl {
           ...newGame,
           players: newGame.players.map(otherPlayer =>
             otherPlayer.id === newPlayer.id ? newPlayer : otherPlayer),
+          action,
         },
       };
     });
@@ -54,6 +75,38 @@ class GameControl {
         game: {
           ...game,
           activePlayer,
+        },
+      };
+    });
+  }
+
+  placeOcean(player, tile) {
+    this.update(game => {
+      player = this.getPlayer(game, player);
+      if (!player) {
+        return null;
+      }
+      if (!player.active) {
+        return null;
+      }
+      tile = this.getTile(game, tile);
+      if (!tile) {
+        return null;
+      }
+      if (!tile.oceanOnly) {
+        return null;
+      }
+      return {
+        game: {
+          ...game,
+          board: game.board.map(row => row.map(otherTile => otherTile === tile ? ({
+            ...otherTile,
+            content: {
+              type: 'ocean',
+            },
+            owner: player.id,
+          }) : otherTile)),
+          action: "any",
         },
       };
     });

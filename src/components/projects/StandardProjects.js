@@ -28,7 +28,7 @@ class StandardProjects extends Component {
           <StandardProject
             key={index}
             offset={{x: 10, y: 35 + 25 * index}}
-            activePlayer={game.activePlayer} project={project}
+            game={game} activePlayer={game.activePlayer} project={project}
             control={control}
           />
         ))}

@@ -11,18 +11,27 @@ class Hex extends Component {
     return {longSize, shortSize, longOffset, shortOffset};
   }
 
+  onClick = () => {
+    this.props.onClick(this.props.tile);
+  };
+
   render() {
     const {
       size = Hexagon.size,
       x = 0, y = 0,
-      fill = 'black',
+      stroke = 'red', fill = 'black',
+      className, onClick,
     } = this.props;
     const {shortSize, longOffset, shortOffset} = this.constructor.getMeasurements(size);
     return (
-      <DefaultHexagon position={{
-        x: (y % 2 === 0 ? 0 : shortSize / 2) + shortOffset * x,
-        y: longOffset * y,
-      }} fill={fill}/>
+      <DefaultHexagon
+        position={{
+          x: (y % 2 === 0 ? 0 : shortSize / 2) + shortOffset * x,
+          y: longOffset * y,
+        }}
+        stroke={stroke} fill={fill}
+        className={className} onClick={onClick ? this.onClick : null}
+      />
     );
   }
 }

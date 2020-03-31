@@ -109,8 +109,11 @@ class GameService {
   	{id: 1, colour: 'red', fontColour: 'white'},
   	{id: 2, colour: 'blue', fontColour: 'white'},
   ];
-  static canPurchase(player, project) {
+  static canPurchase(game, player, project) {
     if (!player) {
+      return false;
+    }
+    if (game.action !== "any") {
       return false;
     }
   	for (const name in project.cost) {
@@ -134,8 +137,8 @@ class GameService {
     return true;
   }
   static purchase(game, player, project) {
-  	if (!GameService.canPurchase(player, project)) {
-    	return {newPlayer: player, newGame: game};
+  	if (!GameService.canPurchase(game, player, project)) {
+    	return {newPlayer: player, newGame: game, actions: game.action};
     }
     const newPlayer = {...player, resources: {...player.resources}};
     for (const name in project.cost) {
@@ -186,7 +189,29 @@ class GameService {
           _.indexBy(newGame.globalParameters, 'name'));
       }
     }
-    return {newPlayer, newGame};
+    let action = "any";
+    tilesForLoop: for (const name in project.tiles) {
+      if (!project.tiles.hasOwnProperty(name)) {
+        continue;
+      }
+      const count = project.tiles[name];
+      // eslint-disable-next-line no-unused-vars
+      for (const i of _.range(count)) {
+        action = `place-${name}`;
+        break tilesForLoop;
+      }
+    }
+    return {newPlayer, newGame, action};
+  }
+  static canPlaceOcean(game, player, tile) {
+    if (!tile.oceanOnly) {
+      return false;
+    }
+    if (tile.content) {
+      return false;
+    }
+
+    return true;
   }
   static makeGame({playerCount = 2} = {}) {
   	return {
@@ -196,6 +221,7 @@ class GameService {
       players: this.players
       	.slice(0, playerCount)
         .map(player => this.makePlayer(player)),
+      action: "none",
     };
   }
   static makeBoard() {
@@ -206,6 +232,7 @@ class GameService {
       ) || (y === 0 && x === 0) || (y === 8 && x === 0),
       oceanOnly: `${x},${y}` in this.boardOceans,
       allowedCity: this.boardCities[`${x},${y}`] || null,
+      content: null, owner: null,
     })));
   }
   static makeGlobalParameters() {

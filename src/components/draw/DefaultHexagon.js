@@ -5,12 +5,13 @@ class DefaultHexagon extends Component {
   static xlinkHref = 'hexagonDefault';
 
   render() {
-    const {position = {x: 0, y: 0}, fill} = this.props;
+    const {position = {x: 0, y: 0}, stroke, fill, className, onClick} = this.props;
     return (
       <use
         x={position.x} y={position.y}
         xlinkHref={`#${this.constructor.xlinkHref}`}
-        fill={fill}
+        stroke={stroke} fill={fill}
+        className={className} onClick={onClick}
       />
     );
   }

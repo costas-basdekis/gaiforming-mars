@@ -37,7 +37,7 @@ class Game extends Component {
           offset={{x: 10, y: 10}}
         />
         <Board
-          board={game.board}
+          game={game} control={control} activePlayer={game.activePlayer} board={game.board}
           offset={{x: 10, y: 10 + globalParametersSize.height + 20}}
         />
         <Players

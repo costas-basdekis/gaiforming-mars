@@ -24,13 +24,13 @@ class Hexagon extends Component {
   }
 
   render() {
-    const {id, size = this.constructor.size, position, fill} = this.props;
+    const {id, size = this.constructor.size, position, stroke, fill} = this.props;
     return (
       <polygon
         id={id}
         transform={position ? `translate(${position.x}, ${position.y})` : undefined}
         points={this.constructor.getPointsString(size)}
-        stroke={'red'} strokeWidth={3}
+        stroke={stroke} strokeWidth={3}
         fill={fill}
       />
     );
