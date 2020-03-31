@@ -49,6 +49,7 @@ class StandardProject extends Component {
       <g transform={`translate(${offset.x}, ${offset.y})`}>
         {Object.keys(project.cost).map((resourceName, index) => (
           <ResourceBox
+            key={index}
             resource={{
               value: -project.cost[resourceName].value,
               type: GameService.resourcesByName[resourceName],
@@ -57,15 +58,25 @@ class StandardProject extends Component {
           />
         ))}
         <RightArrow offset={{x: Object.keys(project.cost).length * 25, y: 0}}/>
-        {globalParametersComponents.map(GlobalParameter => (
-          <GlobalParameter offset={{x: (Object.keys(project.cost).length + 1) * 25, y: 0}}/>
+        {globalParametersComponents.map((GlobalParameter, index) => (
+          <GlobalParameter
+            key={index}
+            offset={{x: (Object.keys(project.cost).length + 1) * 25, y: 0}}
+          />
         ))}
-        {tilesComponents.map(Component => (
-          <Component offset={{x: (Object.keys(project.cost).length + 1 + globalParametersComponents.length) * 25, y: 0}}/>
+        {tilesComponents.map((Component, index) => (
+          <Component
+            key={index}
+            offset={{
+              x: (Object.keys(project.cost).length + 1 + globalParametersComponents.length) * 25,
+              y: 0,
+            }}
+          />
         ))}
         {benefits.map(([resourceName, productionOrValue], index) => (
           productionOrValue.production ? (
             <ProductionBox
+              key={index}
               resource={{
                 ...productionOrValue,
                 type: GameService.resourcesByName[resourceName],
@@ -74,6 +85,7 @@ class StandardProject extends Component {
             />
           ) : (
             <ResourceBox
+              key={index}
               resource={{
                 ...productionOrValue,
                 type: GameService.resourcesByName[resourceName],
