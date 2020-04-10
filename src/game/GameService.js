@@ -244,6 +244,25 @@ class GameService {
 
     return true;
   }
+  static placeOcean(game, player, tile) {
+    if (!GameService.canPlaceOcean(game, player, tile)) {
+      return {newPlayer: player, newGame: game, action: game.action};
+    }
+
+    const newGame = {
+      ...game,
+      board: game.board.map(row => row.map(otherTile => otherTile === tile ? ({
+        ...otherTile,
+        content: {
+          type: 'ocean',
+        },
+        owner: player.id,
+      }) : otherTile)),
+      action: null,
+    };
+
+    return {newPlayer: player, newGame, action: null};
+  }
   static makeGame({playerCount = 2} = {}) {
   	return {
       board: this.makeBoard(),

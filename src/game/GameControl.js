@@ -93,20 +93,17 @@ class GameControl {
       if (!tile) {
         return null;
       }
-      if (!tile.oceanOnly) {
+      const {newGame, newPlayer, action} =
+        GameService.placeOcean(game, player, tile);
+      if (newPlayer === player && newGame === game) {
         return null;
       }
       return {
         game: {
-          ...game,
-          board: game.board.map(row => row.map(otherTile => otherTile === tile ? ({
-            ...otherTile,
-            content: {
-              type: 'ocean',
-            },
-            owner: player.id,
-          }) : otherTile)),
-          action: null,
+          ...newGame,
+          players: newGame.players.map(otherPlayer =>
+            otherPlayer.id === newPlayer.id ? newPlayer : otherPlayer),
+          action,
         },
       };
     });
