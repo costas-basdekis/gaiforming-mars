@@ -71,6 +71,7 @@ class GameService {
       benefit: {energy: {production: 1}},
       globalParameters: {},
       tiles: {},
+      conditions: {},
     },
   	{
     	name: 'asteroid',
@@ -79,6 +80,7 @@ class GameService {
       benefit: {tr: {production: 1}},
       globalParameters: {temperature: 1},
       tiles: {},
+      conditions: {maxTemperature: 18},
     },
   	{
     	name: 'aquifer',
@@ -87,6 +89,7 @@ class GameService {
       benefit: {tr: {production: 1}},
       globalParameters: {oceans: 1},
       tiles: {water: 1},
+      conditions: {maxOceans: 8},
     },
   	{
     	name: 'greenery',
@@ -95,6 +98,7 @@ class GameService {
       benefit: {tr: {production: 1}},
       globalParameters: {oxygen: 1},
       tiles: {greenery: 1},
+      conditions: {},
     },
   	{
     	name: 'city',
@@ -103,6 +107,7 @@ class GameService {
       benefit: {money: {production: 1}},
       globalParameters: {},
       tiles: {city: 1},
+      conditions: {},
     },
   ];
   static players = [
@@ -134,6 +139,26 @@ class GameService {
       	if (cost.production > resource.production) {
         	return false;
         }
+      }
+    }
+  	for (const condition in project.conditions) {
+  	  if (!project.conditions.hasOwnProperty(condition)) {
+  	    continue;
+      }
+  	  const value = project.conditions[condition];
+  	  switch (condition) {
+        case "maxOceans":
+          if (game.globalParameters.oceans.value > value) {
+            return false;
+          }
+          break;
+        case "maxTemperature":
+          if (game.globalParameters.temperature.value > value) {
+            return false;
+          }
+          break;
+        default:
+          throw new Error(`Unknown condition '${condition}'`);
       }
     }
 
