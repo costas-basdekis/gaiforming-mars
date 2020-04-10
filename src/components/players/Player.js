@@ -20,6 +20,7 @@ class Player extends Component {
 	selectPlayer = () => {
   	this.props.control.selectPlayer(this.props.player);
   };
+
 	render() {
   	const {player, offset} = this.props;
     const size = this.constructor.getSize();

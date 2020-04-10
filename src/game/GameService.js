@@ -88,7 +88,7 @@ class GameService {
       cost: {money: {value: 18}},
       benefit: {tr: {production: 1}},
       globalParameters: {oceans: 1},
-      tiles: {water: 1},
+      tiles: {ocean: 1},
       conditions: {maxOceans: 8},
     },
   	{
@@ -118,7 +118,7 @@ class GameService {
     if (!player) {
       return false;
     }
-    if (game.action !== "any") {
+    if (game.action) {
       return false;
     }
   	for (const name in project.cost) {
@@ -220,7 +220,7 @@ class GameService {
           _.indexBy(newGame.globalParameters, 'name'));
       }
     }
-    let action = "any";
+    let action = null;
     for (const name in project.tiles) {
       if (!project.tiles.hasOwnProperty(name)) {
         continue;

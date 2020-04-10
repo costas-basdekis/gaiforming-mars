@@ -13,7 +13,7 @@ import Oxygen from "../draw/Oxygen";
 class StandardProject extends Component {
   static tilesComponents = {
     'city': City,
-    'water': OceanIcon,
+    'ocean': OceanIcon,
     'greenery': Greenery,
   };
   static globalParametersComponents = {

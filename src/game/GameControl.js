@@ -33,7 +33,7 @@ class GameControl {
           ...otherPlayer,
           active: otherPlayer.id === player.id,
         })),
-        action: "any",
+        action: null,
       },
     }));
   }
@@ -106,7 +106,7 @@ class GameControl {
             },
             owner: player.id,
           }) : otherTile)),
-          action: "any",
+          action: null,
         },
       };
     });

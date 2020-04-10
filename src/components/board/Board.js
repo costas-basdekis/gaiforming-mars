@@ -55,7 +55,7 @@ class Board extends Component {
             key={`${tile.x},${tile.y}`}
             x={tile.x} y={tile.y}
           />)}
-        {game.action === "place-water" ? (
+        {game.action === "place-ocean" ? (
           activeTiles.filter(tile => GameService.canPlaceOcean(game, activePlayer, tile)).map(tile =>
             <Hex
               key={`${tile.x},${tile.y}`}
