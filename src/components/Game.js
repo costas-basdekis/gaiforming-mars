@@ -4,7 +4,7 @@ import Players from "./players/Players";
 import StandardProjects from "./projects/StandardProjects";
 import GlobalParameters from "./parameters/GlobalParameters";
 import DefaultHexagon from "./draw/DefaultHexagon";
-import Ocean from "./draw/Ocean";
+import OceanIcon from "./draw/OceanIcon";
 import City from "./draw/City";
 
 class Game extends Component {
@@ -29,7 +29,7 @@ class Game extends Component {
         <defs>
           <GlobalParameters.Defs />
           <DefaultHexagon.Def/>
-          <Ocean.Def/>
+          <OceanIcon.Def/>
           <City.Def/>
         </defs>
         <GlobalParameters

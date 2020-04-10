@@ -1,7 +1,7 @@
 import React, {Component} from "react";
+import utils from "../../utils";
 
 class Hexagon extends Component {
-  static size = 25;
   static points = [
     [0, 50],
     [43, 25],
@@ -24,7 +24,7 @@ class Hexagon extends Component {
   }
 
   render() {
-    const {id, size = this.constructor.size, position, stroke, fill} = this.props;
+    const {id, size = utils.defaultBoardTileSize, position, stroke, fill} = this.props;
     return (
       <polygon
         id={id}

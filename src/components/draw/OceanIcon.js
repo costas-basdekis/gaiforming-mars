@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-class Ocean extends Component {
+class OceanIcon extends Component {
   static path = [
     <path key={'hexagon'} fill={'cyan'} stroke={'black'} d={`
       M 14.57076 20.5262
@@ -55,7 +55,7 @@ class Ocean extends Component {
   }
 }
 
-class OceanDef extends Component {
+class OceanIconDef extends Component {
   static xlinkHref = "ocean-gradient";
   render() {
     return (
@@ -66,6 +66,6 @@ class OceanDef extends Component {
     );
   }
 }
-Ocean.Def = OceanDef;
+OceanIcon.Def = OceanIconDef;
 
-export default Ocean;
+export default OceanIcon;

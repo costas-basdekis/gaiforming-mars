@@ -5,7 +5,7 @@ import RightArrow from "../draw/RightArrow";
 import City from "../draw/City";
 import ProductionBox from "../resources/ProductionBox";
 import _ from 'underscore';
-import Ocean from "../draw/Ocean";
+import OceanIcon from "../draw/OceanIcon";
 import Greenery from "../draw/Greenery";
 import TemperatureGauge from "../draw/TemperatureGauge";
 import Oxygen from "../draw/Oxygen";
@@ -13,7 +13,7 @@ import Oxygen from "../draw/Oxygen";
 class StandardProject extends Component {
   static tilesComponents = {
     'city': City,
-    'water': Ocean,
+    'water': OceanIcon,
     'greenery': Greenery,
   };
   static globalParametersComponents = {
