@@ -117,6 +117,9 @@ class GameService {
       return false;
     }
   	for (const name in project.cost) {
+      if (!project.cost.hasOwnProperty(name)) {
+        continue;
+      }
     	if (!(name in player.resources)) {
       	return false;
       }
@@ -142,6 +145,9 @@ class GameService {
     }
     const newPlayer = {...player, resources: {...player.resources}};
     for (const name in project.cost) {
+      if (!project.cost.hasOwnProperty(name)) {
+        continue;
+      }
     	const cost = project.cost[name];
     	const resource = newPlayer.resources[name] = {...newPlayer.resources[name]};
       if ('value' in cost) {
@@ -190,16 +196,16 @@ class GameService {
       }
     }
     let action = "any";
-    tilesForLoop: for (const name in project.tiles) {
+    for (const name in project.tiles) {
       if (!project.tiles.hasOwnProperty(name)) {
         continue;
       }
       const count = project.tiles[name];
-      // eslint-disable-next-line no-unused-vars
-      for (const i of _.range(count)) {
-        action = `place-${name}`;
-        break tilesForLoop;
+      if (!count) {
+        continue;
       }
+      action = `place-${name}`;
+      break
     }
     return {newPlayer, newGame, action};
   }
