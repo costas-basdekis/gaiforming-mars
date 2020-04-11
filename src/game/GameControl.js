@@ -47,19 +47,11 @@ class GameControl {
       if (!player.active) {
         return null;
       }
-      const {newGame, newPlayer, action} =
-        GameService.purchase(game, player, project);
-      if (newPlayer === player && newGame === game) {
+      const newGame = GameService.purchase(game, player, project);
+      if (newGame === game) {
         return null;
       }
-      return {
-        game: {
-          ...newGame,
-          players: newGame.players.map(otherPlayer =>
-            otherPlayer.id === newPlayer.id ? newPlayer : otherPlayer),
-          action,
-        },
-      };
+      return {game: newGame};
     });
     this.updateActivePlayer();
   }
@@ -93,19 +85,11 @@ class GameControl {
       if (!tile) {
         return null;
       }
-      const {newGame, newPlayer, action} =
-        GameService.placeOcean(game, player, tile);
-      if (newPlayer === player && newGame === game) {
+      const newGame = GameService.placeOcean(game, player, tile);
+      if (newGame === game) {
         return null;
       }
-      return {
-        game: {
-          ...newGame,
-          players: newGame.players.map(otherPlayer =>
-            otherPlayer.id === newPlayer.id ? newPlayer : otherPlayer),
-          action,
-        },
-      };
+      return {game: newGame};
     });
   }
 }

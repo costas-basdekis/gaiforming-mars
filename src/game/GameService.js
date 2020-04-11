@@ -166,7 +166,7 @@ class GameService {
   }
   static purchase(game, player, project) {
   	if (!GameService.canPurchase(game, player, project)) {
-    	return {newPlayer: player, newGame: game, actions: game.action};
+    	return game;
     }
     const newPlayer = {...player, resources: {...player.resources}};
     for (const name in project.cost) {
@@ -232,7 +232,20 @@ class GameService {
       action = `place-${name}`;
       break
     }
-    return {newPlayer, newGame, action};
+    if (newPlayer !== player) {
+      if (newGame === game) {
+        newGame = {...game};
+      }
+      newGame.players = newGame.players.map(
+        oldPlayer => oldPlayer.id === newPlayer.id ? newPlayer : oldPlayer);
+    }
+    if (action !== game.action) {
+      if (newGame === game) {
+        newGame = {...game};
+      }
+      newGame.action = action;
+    }
+    return newGame;
   }
   static canPlaceOcean(game, player, tile) {
     if (!tile.oceanOnly) {
@@ -246,7 +259,7 @@ class GameService {
   }
   static placeOcean(game, player, tile) {
     if (!GameService.canPlaceOcean(game, player, tile)) {
-      return {newPlayer: player, newGame: game, action: game.action};
+      return game;
     }
 
     const newGame = {
@@ -261,7 +274,7 @@ class GameService {
       action: null,
     };
 
-    return {newPlayer: player, newGame, action: null};
+    return newGame;
   }
   static makeGame({playerCount = 2} = {}) {
   	return {
