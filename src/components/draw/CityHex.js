@@ -161,10 +161,10 @@ class CityHex extends Component {
   ];
 
   render() {
-    const {x = 0, y = 0} = this.props;
+    const {x = 0, y = 0, fill} = this.props;
     const offset = utils.getBoardTileOffsetFromPosition({x, y});
     return (
-      <g transform={`translate(${offset.x}, ${offset.y})`}>
+      <g transform={`translate(${offset.x}, ${offset.y})`} fill={fill}>
         {this.constructor.path}
       </g>
     );

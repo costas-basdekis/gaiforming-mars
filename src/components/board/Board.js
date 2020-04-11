@@ -40,6 +40,15 @@ class Board extends Component {
     this.props.control.placeCity(this.props.game.activePlayer, tile);
   };
 
+  getTileFillColour(tile) {
+    let player = this.props.game.players
+      .find(player => player.id === tile.content.ownerId);
+    if (!player) {
+      return undefined;
+    }
+    return player.colour;
+  }
+
   render() {
     const {game, activePlayer, board, offset} = this.props;
     const {x, y, width, height} = this.constructor.getBorder(board);
@@ -66,6 +75,7 @@ class Board extends Component {
           <TypeHex
             key={`${tile.x},${tile.y}`}
             x={tile.x} y={tile.y}
+            fill={this.getTileFillColour(tile)}
           />)}
         {game.action === "place-ocean" ? (
           activeTiles.filter(tile => GameService.canPlaceOcean(game, activePlayer, tile)).map(tile =>
