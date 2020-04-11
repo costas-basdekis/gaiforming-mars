@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-class Greenery extends Component {
+class GreeneryIcon extends Component {
   static path = [
     <path key={'hexagon'} fill={'green'} stroke={'black'} d={`
       M 14.57076 20.5262
@@ -52,4 +52,4 @@ class Greenery extends Component {
   }
 }
 
-export default Greenery;
+export default GreeneryIcon;

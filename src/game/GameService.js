@@ -270,6 +270,7 @@ class GameService {
         ...otherTile,
         content: {
           type: 'ocean',
+          ownerId: null,
         },
         owner: player.id,
       }) : otherTile)),
@@ -291,6 +292,82 @@ class GameService {
     }
 
     return newGame;
+  }
+  static canPlaceGreenery(game, player, tile) {
+    if (!this.canPlaceGreeneryRegardlessOfNeighbours(game, tile)) {
+      return false;
+    }
+    if (this.canPlaceGreeneryWithOwnNeighbour(game, player, tile)) {
+      return true;
+    }
+    if (this.canPlaceGreeneryWithOwnNeighbourAnywhere(game, player)) {
+      return false;
+    }
+
+    return true;
+  }
+  static placeGreenery(game, player, tile) {
+    if (!this.canPlaceGreenery(game, player, tile)) {
+      return game;
+    }
+
+    let placementBonus = this.getPlacementBonus(game, tile);
+
+    const newGame = {
+      ...game,
+      board: game.board.map(row => row.map(otherTile => otherTile === tile ? ({
+        ...otherTile,
+        content: {
+          type: 'greenery',
+          ownerId: player.id,
+        },
+        owner: player.id,
+      }) : otherTile)),
+      action: null,
+    };
+
+    if (placementBonus) {
+      newGame.players = newGame.players.map(
+        otherPlayer => otherPlayer.id === player.id ? ({
+          ...otherPlayer,
+          resources: {
+            ...otherPlayer.resources,
+            money: {
+              ...otherPlayer.resources.money,
+              value: otherPlayer.resources.money.value + placementBonus.money.value,
+            },
+          },
+        }) : otherPlayer)
+    }
+
+    return newGame;
+  }
+  static canPlaceGreeneryWithOwnNeighbourAnywhere(game, player) {
+    const possibleGreeneryTilesWithOwnNeighbour = _.flatten(game.board)
+      .filter(tile => tile.active)
+      .filter(tile => this.canPlaceGreeneryRegardlessOfNeighbours(game, tile))
+      .filter(tile => this.canPlaceGreeneryWithOwnNeighbour(game, player, tile));
+
+    return possibleGreeneryTilesWithOwnNeighbour.length > 0;
+  }
+  static canPlaceGreeneryRegardlessOfNeighbours(game, tile) {
+    if (tile.oceanOnly) {
+      return false;
+    }
+    if (tile.allowedCity) {
+      return false;
+    }
+    if (tile.content) {
+      return false;
+    }
+
+    return true;
+  }
+  static canPlaceGreeneryWithOwnNeighbour(game, player, tile) {
+    let neighbours = this.getNeighbours(game, tile);
+    const ownNeighbours = neighbours.filter(otherTile =>
+      otherTile.content && otherTile.content.ownerId === player.id);
+    return ownNeighbours.length > 0;
   }
   static getPlacementBonus(game, tile) {
     const bonus = {money: {value: 0}};

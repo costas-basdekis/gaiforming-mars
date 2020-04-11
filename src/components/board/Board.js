@@ -5,11 +5,13 @@ import City from "../draw/City";
 import GameService from "../../game/GameService";
 import _ from "underscore";
 import OceanHex from "../draw/OceanHex";
+import GreeneryHex from "../draw/GreeneryHex";
 import utils from "../../utils";
 
 class Board extends Component {
   static tileComponents = {
     'ocean': OceanHex,
+    'greenery': GreeneryHex,
   };
   static getBorder(board) {
     const {longSize, shortSize, longOffset, shortOffset} = utils.getBoardTileMeasurements();
@@ -26,6 +28,10 @@ class Board extends Component {
 
   onPlaceOceanClick = tile => {
     this.props.control.placeOcean(this.props.game.activePlayer, tile);
+  };
+
+  onPlaceGreeneryClick = tile => {
+    this.props.control.placeGreenery(this.props.game.activePlayer, tile);
   };
 
   render() {
@@ -70,6 +76,23 @@ class Board extends Component {
               )}
               tile={tile}
               onClick={this.onPlaceOceanClick}
+              className={'clickable'}
+            />)
+        ) : game.action === "place-greenery" ? (
+          activeTiles.filter(tile => GameService.canPlaceGreenery(game, activePlayer, tile)).map(tile =>
+            <Hex
+              key={`${tile.x},${tile.y}`}
+              x={tile.x} y={tile.y}
+              stroke={'blue'}
+              fill={(
+                tile.oceanOnly
+                ? `url(#${OceanIcon.Def.xlinkHref})`
+                : tile.allowedCity
+                ? `url(#${City.Def.xlinkHref})`
+                : undefined
+              )}
+              tile={tile}
+              onClick={this.onPlaceGreeneryClick}
               className={'clickable'}
             />)
         ) : null}

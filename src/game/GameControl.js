@@ -92,6 +92,27 @@ class GameControl {
       return {game: newGame};
     });
   }
+
+  placeGreenery(player, tile) {
+    this.update(game => {
+      player = this.getPlayer(game, player);
+      if (!player) {
+        return null;
+      }
+      if (!player.active) {
+        return null;
+      }
+      tile = this.getTile(game, tile);
+      if (!tile) {
+        return null;
+      }
+      const newGame = GameService.placeGreenery(game, player, tile);
+      if (newGame === game) {
+        return null;
+      }
+      return {game: newGame};
+    });
+  }
 }
 
 export default GameControl;
