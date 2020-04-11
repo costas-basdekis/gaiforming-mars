@@ -262,6 +262,8 @@ class GameService {
       return game;
     }
 
+    let placementBonus = this.getPlacementBonus(game, tile);
+
     const newGame = {
       ...game,
       board: game.board.map(row => row.map(otherTile => otherTile === tile ? ({
@@ -274,7 +276,44 @@ class GameService {
       action: null,
     };
 
+    if (placementBonus) {
+      newGame.players = newGame.players.map(
+        otherPlayer => otherPlayer.id === player.id ? ({
+          ...otherPlayer,
+          resources: {
+            ...otherPlayer.resources,
+            money: {
+              ...otherPlayer.resources.money,
+              value: otherPlayer.resources.money.value + placementBonus.money.value,
+            },
+          },
+        }) : otherPlayer)
+    }
+
     return newGame;
+  }
+  static getPlacementBonus(game, tile) {
+    const bonus = {money: {value: 0}};
+    const neighbours = this.getNeighbours(game, tile);
+    const oceanNeighbours = neighbours.filter(
+      otherTile => otherTile.content && otherTile.content.type === 'ocean');
+    if (!oceanNeighbours.length) {
+      return null;
+    }
+    bonus.money.value += oceanNeighbours.length * 2;
+
+    return bonus;
+  }
+  static NEIGHBOURS_OFFSETS = _
+    .flatten(_.range(-1, 2).map(
+      dX => _.range(-1, 2).map(dY => ({dX, dY}))))
+    .filter(({dX, dY}) => dX !== dY);
+  static getNeighbours(game, tile) {
+    return this.NEIGHBOURS_OFFSETS
+      .map(({dX, dY}) => game.board[tile.y + dY]
+        ? game.board[tile.y + dY][tile.x + dX] : null)
+      .filter(otherTile => otherTile)
+      .filter(otherTile => otherTile.active);
   }
   static makeGame({playerCount = 2} = {}) {
   	return {
