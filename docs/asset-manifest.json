@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/gaiforming-mars/static/css/main.bbc15533.chunk.css",
-    "main.js": "/gaiforming-mars/static/js/main.229709a9.chunk.js",
-    "main.js.map": "/gaiforming-mars/static/js/main.229709a9.chunk.js.map",
+    "main.js": "/gaiforming-mars/static/js/main.b414b548.chunk.js",
+    "main.js.map": "/gaiforming-mars/static/js/main.b414b548.chunk.js.map",
     "runtime-main.js": "/gaiforming-mars/static/js/runtime-main.83e39e18.js",
     "runtime-main.js.map": "/gaiforming-mars/static/js/runtime-main.83e39e18.js.map",
-    "static/js/2.d1ba8d24.chunk.js": "/gaiforming-mars/static/js/2.d1ba8d24.chunk.js",
-    "static/js/2.d1ba8d24.chunk.js.map": "/gaiforming-mars/static/js/2.d1ba8d24.chunk.js.map",
+    "static/js/2.3bc942d2.chunk.js": "/gaiforming-mars/static/js/2.3bc942d2.chunk.js",
+    "static/js/2.3bc942d2.chunk.js.map": "/gaiforming-mars/static/js/2.3bc942d2.chunk.js.map",
     "index.html": "/gaiforming-mars/index.html",
-    "precache-manifest.23c33bf1a57a538862eac9209a0bc234.js": "/gaiforming-mars/precache-manifest.23c33bf1a57a538862eac9209a0bc234.js",
+    "precache-manifest.742bd1c278f2a3cf514ad807bb6e45b8.js": "/gaiforming-mars/precache-manifest.742bd1c278f2a3cf514ad807bb6e45b8.js",
     "service-worker.js": "/gaiforming-mars/service-worker.js",
     "static/css/main.bbc15533.chunk.css.map": "/gaiforming-mars/static/css/main.bbc15533.chunk.css.map",
-    "static/js/2.d1ba8d24.chunk.js.LICENSE.txt": "/gaiforming-mars/static/js/2.d1ba8d24.chunk.js.LICENSE.txt"
+    "static/js/2.3bc942d2.chunk.js.LICENSE.txt": "/gaiforming-mars/static/js/2.3bc942d2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.83e39e18.js",
-    "static/js/2.d1ba8d24.chunk.js",
+    "static/js/2.3bc942d2.chunk.js",
     "static/css/main.bbc15533.chunk.css",
-    "static/js/main.229709a9.chunk.js"
+    "static/js/main.b414b548.chunk.js"
   ]
 }
