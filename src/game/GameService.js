@@ -304,16 +304,33 @@ class GameService {
 
     return bonus;
   }
-  static NEIGHBOURS_OFFSETS = _
+  static POSSIBLE_NEIGHBOURS_OFFSETS = _
     .flatten(_.range(-1, 2).map(
       dX => _.range(-1, 2).map(dY => ({dX, dY}))))
-    .filter(({dX, dY}) => dX !== dY);
+    .filter(({dX, dY}) => !(dX === 0 && dY === 0));
   static getNeighbours(game, tile) {
-    return this.NEIGHBOURS_OFFSETS
+    return this.POSSIBLE_NEIGHBOURS_OFFSETS
       .map(({dX, dY}) => game.board[tile.y + dY]
         ? game.board[tile.y + dY][tile.x + dX] : null)
       .filter(otherTile => otherTile)
-      .filter(otherTile => otherTile.active);
+      .filter(otherTile => otherTile.active)
+      .filter(otherTile => this.areTilesNeighbours(otherTile, tile));
+  }
+  static areTilesNeighbours(lhs, rhs) {
+    if (Math.abs(lhs.x - rhs.x) > 1) {
+      return false;
+    }
+    if (Math.abs(lhs.y - rhs.y) > 1) {
+      return false;
+    }
+    if (lhs.y === rhs.y) {
+      return true;
+    }
+    if (rhs.y % 2 === 0) {
+      return lhs.x <= rhs.x;
+    } else {
+      return lhs.x >= rhs.x;
+    }
   }
   static makeGame({playerCount = 2} = {}) {
   	return {
