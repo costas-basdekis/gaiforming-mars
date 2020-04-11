@@ -14,6 +14,8 @@ class ProductionBox extends Component {
             x={"50%"} y={"50%"}
             dominantBaseline={"middle"} textAnchor={"middle"}
             fill={resource.type.fontColour}
+            fontSize={resource.production < 100
+              ? undefined : resource.production < 1000 ? '0.66em' : '0.5em'}
           >{resource.production}</text>
         </svg>
         <rect

@@ -14,6 +14,8 @@ class ResourceBox extends Component {
             x={"50%"} y={"50%"}
             dominantBaseline={"middle"} textAnchor={"middle"}
             fill={resource.type.fontColour}
+            fontSize={resource.value < 100
+              ? undefined : resource.value < 1000 ? '0.66em' : '0.5em'}
           >{resource.value}</text>
         </svg>
         <rect
