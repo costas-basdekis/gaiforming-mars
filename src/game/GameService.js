@@ -165,7 +165,7 @@ class GameService {
     return true;
   }
   static purchase(game, player, project) {
-  	if (!GameService.canPurchase(game, player, project)) {
+  	if (!this.canPurchase(game, player, project)) {
     	return game;
     }
     const newPlayer = {...player, resources: {...player.resources}};
@@ -258,7 +258,7 @@ class GameService {
     return true;
   }
   static placeOcean(game, player, tile) {
-    if (!GameService.canPlaceOcean(game, player, tile)) {
+    if (!this.canPlaceOcean(game, player, tile)) {
       return game;
     }
 
