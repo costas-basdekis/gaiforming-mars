@@ -369,6 +369,62 @@ class GameService {
       otherTile.content && otherTile.content.ownerId === player.id);
     return ownNeighbours.length > 0;
   }
+  static canPlaceCity(game, player, tile) {
+    if (tile.oceanOnly) {
+      return false;
+    }
+    if (tile.allowedCity) {
+      return false;
+    }
+    if (tile.content) {
+      return false;
+    }
+
+    let neighbours = this.getNeighbours(game, tile);
+    const cityNeighbours = neighbours.filter(otherTile =>
+      otherTile.content && otherTile.content.type === 'city');
+    if (cityNeighbours.length) {
+      return false;
+    }
+
+    return true;
+  }
+  static placeCity(game, player, tile) {
+    if (!this.canPlaceCity(game, player, tile)) {
+      return game;
+    }
+
+    let placementBonus = this.getPlacementBonus(game, tile);
+
+    const newGame = {
+      ...game,
+      board: game.board.map(row => row.map(otherTile => otherTile === tile ? ({
+        ...otherTile,
+        content: {
+          type: 'city',
+          ownerId: player.id,
+        },
+        owner: player.id,
+      }) : otherTile)),
+      action: null,
+    };
+
+    if (placementBonus) {
+      newGame.players = newGame.players.map(
+        otherPlayer => otherPlayer.id === player.id ? ({
+          ...otherPlayer,
+          resources: {
+            ...otherPlayer.resources,
+            money: {
+              ...otherPlayer.resources.money,
+              value: otherPlayer.resources.money.value + placementBonus.money.value,
+            },
+          },
+        }) : otherPlayer)
+    }
+
+    return newGame;
+  }
   static getPlacementBonus(game, tile) {
     const bonus = {money: {value: 0}};
     const neighbours = this.getNeighbours(game, tile);

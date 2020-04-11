@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-class City extends Component {
+class CityIcon extends Component {
   static path = [
     <path key={'hexagon'} fill={'grey'} stroke={'black'} d={`
       M 14.57076 20.5262
@@ -180,6 +180,6 @@ class CityDef extends Component {
     );
   }
 }
-City.Def = CityDef;
+CityIcon.Def = CityDef;
 
-export default City;
+export default CityIcon;

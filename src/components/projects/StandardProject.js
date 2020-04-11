@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import GameService from "../../game/GameService";
 import ResourceBox from "../resources/ResourceBox";
 import RightArrow from "../draw/RightArrow";
-import City from "../draw/City";
+import CityIcon from "../draw/CityIcon";
 import ProductionBox from "../resources/ProductionBox";
 import _ from 'underscore';
 import OceanIcon from "../draw/OceanIcon";
@@ -12,7 +12,7 @@ import Oxygen from "../draw/Oxygen";
 
 class StandardProject extends Component {
   static tilesComponents = {
-    'city': City,
+    'city': CityIcon,
     'ocean': OceanIcon,
     'greenery': GreeneryIcon,
   };
